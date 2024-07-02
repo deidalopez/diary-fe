@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 14pt;
   line-height: 1.33em;
 }
@@ -52,11 +52,26 @@ header {
       margin-right: 15px;
     }
   }
+
+  button {
+    width: 100px;
+    height: 24px;
+    font-size: 14pt;
+    background-color: rgb(83, 36, 36);
+    color: white;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(117, 49, 49);
+    }
+  }
 }
 
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 150px;
   margin: 70px 0 0 30px;
 }
