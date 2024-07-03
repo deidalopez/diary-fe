@@ -4,8 +4,7 @@ const getPost = async (id) => {
     const json = await response.json();
 
     if (response.ok) {
-      console.log(response);
-      return json;
+      return { response, json };
     }
   } catch (error) {
     console.log(error);

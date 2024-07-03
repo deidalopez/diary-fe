@@ -3,10 +3,12 @@ const deletePost = async (id) => {
     const response = await fetch(`http://localhost:4000/api/posts/${id}`, {
       method: "DELETE",
     });
+
     const body = await response.text();
     const json = JSON.parse(body);
+
     if (response.ok) {
-      return json;
+      return { response, json };
     }
   } catch (error) {
     console.error(error);
