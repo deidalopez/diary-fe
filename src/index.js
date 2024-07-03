@@ -3,17 +3,17 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import { PostContextProvider } from "./context/PostContext";
+import { PostsContextProvider } from "./context/PostContext";
 import "./styles/index.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <PostContextProvider>
+    <PostsContextProvider>
       <Router>
         <App />
       </Router>
-    </PostContextProvider>
+    </PostsContextProvider>
   </React.StrictMode>
 );
 

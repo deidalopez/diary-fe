@@ -3,7 +3,7 @@ const getPosts = async () => {
     const response = await fetch("http://localhost:4000/api/posts");
     const json = await response.json();
     if (response.ok) {
-      return json;
+      return {response, json};
     }
   } catch (error) {
     console.log("error in getPosts", error);

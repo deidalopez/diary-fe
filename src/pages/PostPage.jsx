@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "../styles/styles.module.scss";
 import getPost from "../api/getPost";
 
 const PostPage = () => {
