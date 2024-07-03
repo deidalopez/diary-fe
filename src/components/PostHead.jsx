@@ -1,24 +1,26 @@
 import React from "react";
 import styles from "../styles/styles.module.scss";
 import { Link } from "react-router-dom";
-// import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import deletePost from "../api/deletePost";
+import { usePostsContext } from "../hooks/usePostContext";
 
 const PostHead = ({ post }) => {
-  console.log(post);
+  const { dispatch } = usePostsContext();
+
   const handleClick = async () => {
-    const response = await deletePost(post._id);
+    const { response, json } = await deletePost(post._id);
+
     // const response = await fetch(
     //   `http://localhost:4000/api/posts/${post._id}`,
     //   {
     //     method: "DELETE",
     //   }
     // );
-    const body = await response.text();
-    const json = JSON.parse(body);
+    // const body = await response.text();
+    // const json = JSON.parse(body);
 
     if (response.ok) {
-      console.log("post deleted", json);
+      dispatch({ type: "DELETE_POST", payload: json });
     }
   };
 

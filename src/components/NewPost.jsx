@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "../styles/styles.module.scss";
 import createPost from "../api/createPost";
+import { usePostsContext } from "../hooks/usePostContext";
+
 const NewPost = () => {
   const { register, handleSubmit, setError, reset, formState } = useForm();
+  const { dispatch } = usePostsContext();
 
   const onSubmit = async (data) => {
     const post = {
@@ -22,6 +25,7 @@ const NewPost = () => {
         reset();
         const body = await response.text();
         const newPost = JSON.parse(body);
+        dispatch({ type: "CREATE_POST", payload: newPost });
         console.log("new post created", newPost);
       }
     } catch (error) {

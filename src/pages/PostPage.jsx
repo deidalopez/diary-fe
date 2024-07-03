@@ -9,8 +9,8 @@ const PostPage = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const fetchedPost = await getPost(id);
-        setPost(fetchedPost);
+        const { json } = await getPost(id);
+        setPost(json);
       } catch (error) {
         console.log(error);
       }
