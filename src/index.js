@@ -5,14 +5,16 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { PostsContextProvider } from "./context/PostContext";
 import "./styles/index.scss";
-
+import { AuthContextProvider } from "./context/AuthContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <PostsContextProvider>
-      <Router>
-        <App />
-      </Router>
+      <AuthContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </AuthContextProvider>
     </PostsContextProvider>
   </React.StrictMode>
 );
