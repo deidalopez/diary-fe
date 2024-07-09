@@ -29,7 +29,7 @@ const useSignup = () => {
 
       if (response.ok) {
         localStorage.setItem("user", JSON.stringify(json));
-        dispatch({ type: "SIGNUP", payload: json });
+        dispatch({ type: "LOGIN", payload: json });
         setLoading(false);
       }
     } catch (error) {
