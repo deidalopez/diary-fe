@@ -8,6 +8,9 @@ const useLogin = () => {
   const { dispatch } = useAuthContext();
 
   const login = async (email, password) => {
+    setLoading(null);
+    setError(null);
+
     try {
       const response = await fetch("http://localhost:4000/api/user/login", {
         method: "POST",

@@ -7,9 +7,12 @@ const useSignup = () => {
 
   const { dispatch } = useAuthContext();
 
-  const login = async (email, password) => {
+  const signup = async (email, password) => {
+    setLoading(false);
+    setError(null);
+
     try {
-      const response = await fetch("http://localhost:4000/api/user/login", {
+      const response = await fetch("http://localhost:4000/api/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,7 +29,7 @@ const useSignup = () => {
 
       if (response.ok) {
         localStorage.setItem("user", JSON.stringify(json));
-        dispatch({ type: "LOGIN", payload: json });
+        dispatch({ type: "SIGNUP", payload: json });
         setLoading(false);
       }
     } catch (error) {
@@ -36,7 +39,7 @@ const useSignup = () => {
     }
   };
 
-  return { login, error, loading };
+  return { signup, error, loading };
 };
 
 export default useSignup;
