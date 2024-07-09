@@ -1,19 +1,20 @@
 import React from "react";
 import { useEffect } from "react";
 import { usePostsContext } from "../hooks/usePostContext";
-import PostHead from "../components/PostHead";
-import styles from "../styles/styles.module.scss";
-import NewPost from "../components/NewPost";
-
+import { useAuthContext } from "../hooks/useAuthContext";
 import getPosts from "../api/getPosts";
+import PostHead from "../components/PostHead";
+import NewPost from "../components/NewPost";
+import styles from "../styles/styles.module.scss";
 
 const Home = () => {
   const { posts, dispatch } = usePostsContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const { response, json } = await getPosts();
+        const { response, json } = await getPosts({ user });
 
         if (response.ok) dispatch({ type: "SET_POSTS", payload: json });
       } catch (error) {
@@ -21,8 +22,8 @@ const Home = () => {
       }
     };
 
-    fetchPost();
-  }, [dispatch]);
+    if (user) fetchPost();
+  }, [dispatch, user]);
 
   console.log(posts);
 
