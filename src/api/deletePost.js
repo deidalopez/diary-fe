@@ -1,7 +1,10 @@
-const deletePost = async (id) => {
+const deletePost = async ({ id, user }) => {
   try {
     const response = await fetch(`http://localhost:4000/api/posts/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     });
 
     const body = await response.text();

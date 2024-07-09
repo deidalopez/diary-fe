@@ -3,21 +3,14 @@ import styles from "../styles/styles.module.scss";
 import { Link } from "react-router-dom";
 import deletePost from "../api/deletePost";
 import { usePostsContext } from "../hooks/usePostContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const PostHead = ({ post }) => {
   const { dispatch } = usePostsContext();
+  const { user } = useAuthContext();
 
   const handleClick = async () => {
-    const { response, json } = await deletePost(post._id);
-
-    // const response = await fetch(
-    //   `http://localhost:4000/api/posts/${post._id}`,
-    //   {
-    //     method: "DELETE",
-    //   }
-    // );
-    // const body = await response.text();
-    // const json = JSON.parse(body);
+    const { response, json } = await deletePost({ id: post._id, user });
 
     if (response.ok) {
       dispatch({ type: "DELETE_POST", payload: json });
@@ -31,7 +24,7 @@ const PostHead = ({ post }) => {
           <h2>
             <Link to={`/api/posts/${post._id}`}>{post.title}</Link>
           </h2>
-          <span className="material-symbols-outlined" onClick={handleClick}>
+          <span className="material-symbols-outlined " onClick={handleClick}>
             <h1>Delete</h1>
           </span>
         </span>

@@ -1,4 +1,4 @@
-const createPost = async (data) => {
+const createPost = async ({ data, user }) => {
   const post = {
     date: data.date,
     title: data.title,
@@ -11,6 +11,7 @@ const createPost = async (data) => {
       body: JSON.stringify(post),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
     // const body = await response.text();

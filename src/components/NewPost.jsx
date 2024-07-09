@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 import styles from "../styles/styles.module.scss";
 import createPost from "../api/createPost";
 import { usePostsContext } from "../hooks/usePostContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const NewPost = () => {
   const { register, handleSubmit, setError, reset, formState } = useForm();
   const { dispatch } = usePostsContext();
+  const { user } = useAuthContext();
 
   const onSubmit = async (data) => {
     const post = {
@@ -16,7 +18,7 @@ const NewPost = () => {
     };
 
     try {
-      const response = await createPost(post);
+      const response = await createPost({ data: post, user });
       if (!response.ok) {
         setError("error in new post");
       }
