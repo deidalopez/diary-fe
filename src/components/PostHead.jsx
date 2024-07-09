@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import deletePost from "../api/deletePost";
 import { usePostsContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { format } from "date-fns";
 
 const PostHead = ({ post }) => {
   const { dispatch } = usePostsContext();
@@ -28,7 +29,7 @@ const PostHead = ({ post }) => {
             <h1>Delete</h1>
           </span>
         </span>
-        <div>{post.date}</div>
+        <div>{format(new Date(post.date), "MMMM d, y")}</div>
         <p>{post.content.substring(0, 200) + " ..."}</p>
       </li>
     </div>
