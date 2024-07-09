@@ -6,7 +6,7 @@ const createPost = async ({ data, user }) => {
   };
 
   try {
-    const response = await fetch("http://localhost:4000/api/posts", {
+    const response = await fetch("https://diary-api-82gt.onrender.com/api/posts", {
       method: "POST",
       body: JSON.stringify(post),
       headers: {

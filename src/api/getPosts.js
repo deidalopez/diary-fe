@@ -4,7 +4,7 @@ const getPosts = async ({ user }) => {
   };
 
   try {
-    const response = await fetch("http://localhost:4000/api/posts", {
+    const response = await fetch("https://diary-api-82gt.onrender.com0/api/posts", {
       headers,
     });
 

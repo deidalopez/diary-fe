@@ -1,6 +1,6 @@
 const deletePost = async ({ id, user }) => {
   try {
-    const response = await fetch(`http://localhost:4000/api/posts/${id}`, {
+    const response = await fetch(`https://diary-api-82gt.onrender.com/api/posts/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.token}`,
