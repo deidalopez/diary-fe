@@ -1,14 +1,58 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { format } from "date-fns";
+
 import styles from "../styles/styles.module.scss";
 import createPost from "../api/createPost";
 import { usePostsContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import editPost from "../api/editPost";
 
-const NewPost = () => {
-  const { register, handleSubmit, setError, reset, formState } = useForm();
+const NewPost = (currentPost, isEdit, callback) => {
+  const { register, handleSubmit, setError, reset, formState } = useForm({
+    defaultValues: currentPost.post
+      ? {
+          ...currentPost.post,
+          date: format(new Date(currentPost.post.date), "yyyy-MM-dd"),
+        }
+      : {},
+  });
+
   const { dispatch } = usePostsContext();
   const { user } = useAuthContext();
+
+  const onEdit = async (data) => {
+    const post = {
+      date: data.date,
+      title: data.title,
+      content: data.content,
+    };
+
+    try {
+      console.log(post);
+      const { response, json } = await editPost({
+        id: currentPost.post._id,
+        data: post,
+        user,
+      });
+      if (!response.ok) {
+        setError("error in new post");
+      }
+
+      if (response.ok) {
+        reset();
+        const body = await json.text();
+        const newPost = JSON.parse(body);
+        dispatch({
+          type: "EDIT_POST",
+          payload: newPost,
+        });
+      }
+      callback();
+    } catch (error) {
+      console.error("error in new post ", error);
+    }
+  };
 
   const onSubmit = async (data) => {
     const post = {
@@ -36,7 +80,10 @@ const NewPost = () => {
   };
 
   const form = (
-    <form className={styles.postForm} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={styles.postForm}
+      onSubmit={handleSubmit(isEdit ? onEdit : onSubmit)}
+    >
       <div>
         <h3>Create a post</h3>
       </div>

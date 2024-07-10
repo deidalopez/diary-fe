@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { usePostsContext } from "../hooks/usePostContext";
 import getPost from "../api/getPost";
-import editPost from "../api/editPost";
 import styles from "../styles/styles.module.scss";
 import NewPost from "../components/NewPost";
 
 const PostPage = () => {
-  const { dispatch } = usePostsContext();
   const { id } = useParams();
   const { user } = useAuthContext();
 
   const [post, setPost] = useState(null);
   const [editView, setEditView] = useState(false);
-
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -32,20 +28,13 @@ const PostPage = () => {
   const handleEditClick = () =>
     editView ? setEditView(false) : setEditView(true);
 
-  const handleSave = async () => {
-    const { response, json } = await editPost({ id: post._id, user });
-    if (response.ok) {
-      dispatch({ type: "EDIT_POST", payload: json });
-    }
-  };
-
   if (!post) {
     return null;
   }
 
   const EditMode = (
     <div>
-      <NewPost post={post} />
+      <NewPost post={post} isEdit={true} callback={() => setEditView(false)} />
     </div>
   );
 
