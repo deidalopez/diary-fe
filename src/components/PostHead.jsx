@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import deletePost from "../api/deletePost";
 import { usePostsContext } from "../hooks/usePostContext";

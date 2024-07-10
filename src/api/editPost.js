@@ -1,10 +1,12 @@
 import apiUrl from "../utils/getUrl";
 
-const editPost = async ({ data, user }) => {
+const editPost = async ({ id, data, user }) => {
   try {
-    const response = await fetch(`${apiUrl}/api/posts/${data.id}`, {
+    const response = await fetch(`${apiUrl}/api/posts/${id}`, {
       method: "PATCH",
+      body: JSON.stringify(data),
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       },
     });
