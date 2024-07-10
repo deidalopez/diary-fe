@@ -1,16 +1,16 @@
 import React from "react";
-import styles from "../styles/styles.module.scss";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { format } from "date-fns";
 import deletePost from "../api/deletePost";
 import { usePostsContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { format } from "date-fns";
+import styles from "../styles/styles.module.scss";
 
 const PostHead = ({ post }) => {
   const { dispatch } = usePostsContext();
   const { user } = useAuthContext();
 
-  const handleClick = async () => {
+  const handleClickDelete = async () => {
     const { response, json } = await deletePost({ id: post._id, user });
 
     if (response.ok) {
@@ -19,20 +19,31 @@ const PostHead = ({ post }) => {
   };
 
   return (
-    <div>
-      <li>
-        <span className={styles.postHeadHeader}>
-          <h2>
-            <Link to={`/api/posts/${post._id}`}>{post.title}</Link>
-          </h2>
-          <span className="material-symbols-outlined " onClick={handleClick}>
-            <h1>Delete</h1>
+    <li>
+      <span className={styles.postHeadHeader}>
+        <h2>
+          <Link to={`/api/posts/${post._id}`}>{post.title}</Link>
+        </h2>
+        <div>
+          <span
+            className="material-symbols-outlined"
+            onClick={handleClickDelete}
+          >
+            delete
           </span>
-        </span>
-        <div>{format(new Date(post.date), "MMMM d, y")}</div>
-        <p>{post.content.substring(0, 200) + " ..."}</p>
-      </li>
-    </div>
+          <Link to={`/api/posts/${post._id}`}>
+            <span
+              className="material-symbols-outlined"
+              // onClick={handleClickEdit}
+            >
+              edit
+            </span>
+          </Link>
+        </div>
+      </span>
+      <div>{format(new Date(post.date), "MMMM d, y")}</div>
+      <p>{post.content.substring(0, 200) + " ..."}</p>
+    </li>
   );
 };
 
