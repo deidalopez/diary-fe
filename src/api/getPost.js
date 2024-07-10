@@ -1,9 +1,12 @@
+import apiUrl from "../utils/getUrl";
+
 const getPost = async ({ id, user }) => {
   const headers = {
     Authorization: `Bearer ${user.token}`,
   };
+
   try {
-    const response = await fetch(`https://diary-api-82gt.onrender.com/api/posts/${id}`, {
+    const response = await fetch(`${apiUrl}/api/posts/${id}`, {
       headers,
     });
 

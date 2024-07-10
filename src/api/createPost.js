@@ -1,3 +1,5 @@
+import apiUrl from "../utils/getUrl";
+
 const createPost = async ({ data, user }) => {
   const post = {
     date: data.date,
@@ -6,7 +8,7 @@ const createPost = async ({ data, user }) => {
   };
 
   try {
-    const response = await fetch("https://diary-api-82gt.onrender.com/api/posts", {
+    const response = await fetch(`${apiUrl}/api/posts`, {
       method: "POST",
       body: JSON.stringify(post),
       headers: {
@@ -14,8 +16,6 @@ const createPost = async ({ data, user }) => {
         Authorization: `Bearer ${user.token}`,
       },
     });
-    // const body = await response.text();
-    // const newPost = JSON.parse(body);
 
     return response;
     // if (!response.ok) {

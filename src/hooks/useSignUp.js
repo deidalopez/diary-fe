@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+import apiUrl from "../utils/getUrl";
 
 const useSignup = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const { dispatch } = useAuthContext();
 
   const signup = async (email, password) => {
@@ -12,7 +12,7 @@ const useSignup = () => {
     setError(null);
 
     try {
-      const response = await fetch("https://diary-api-82gt.onrender.com/api/user/signup", {
+      const response = await fetch(`${apiUrl}/api/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
