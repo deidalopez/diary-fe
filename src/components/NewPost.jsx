@@ -8,14 +8,16 @@ import { usePostsContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import editPost from "../api/editPost";
 
-const NewPost = (currentPost, isEdit, callback) => {
+const NewPost = ({ currentPost, isEdit, callback }) => {
+
   const { register, handleSubmit, setError, reset, formState } = useForm({
-    defaultValues: currentPost.post
-      ? {
-          ...currentPost.post,
-          date: format(new Date(currentPost.post.date), "yyyy-MM-dd"),
-        }
-      : {},
+    defaultValues:
+      isEdit && currentPost
+        ? {
+            ...currentPost,
+            date: format(new Date(currentPost.date), "yyyy-MM-dd"),
+          }
+        : {},
   });
 
   const { dispatch } = usePostsContext();
@@ -31,7 +33,7 @@ const NewPost = (currentPost, isEdit, callback) => {
     try {
       console.log(post);
       const { response, json } = await editPost({
-        id: currentPost.post._id,
+        id: currentPost._id,
         data: post,
         user,
       });
@@ -82,7 +84,7 @@ const NewPost = (currentPost, isEdit, callback) => {
   const form = (
     <form
       className={styles.postForm}
-      onSubmit={handleSubmit(isEdit ? onEdit : onSubmit)}
+      onSubmit={isEdit ? handleSubmit(onEdit) : handleSubmit(onSubmit)}
     >
       <div>
         <h3>Create a post</h3>

@@ -34,7 +34,11 @@ const PostPage = () => {
 
   const EditMode = (
     <div>
-      <NewPost post={post} isEdit={true} callback={() => setEditView(false)} />
+      <NewPost
+        currentPost={post}
+        isEdit={true}
+        callback={() => setEditView(false)}
+      />
     </div>
   );
 

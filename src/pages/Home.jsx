@@ -44,7 +44,7 @@ const Home = () => {
             posts.map((post) => <PostHead key={post._id} post={post} />)}
         </ul>
       </div>
-      <NewPost />
+      <NewPost/>
     </div>
   );
 };
