@@ -12,6 +12,7 @@ const PostPage = () => {
 
   const [post, setPost] = useState(null);
   const [editView, setEditView] = useState(false);
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -23,7 +24,7 @@ const PostPage = () => {
     };
 
     if (user) fetchPost();
-  }, [id, user]);
+  }, [id, user, editView]);
 
   const handleEditClick = () =>
     editView ? setEditView(false) : setEditView(true);
@@ -44,7 +45,6 @@ const PostPage = () => {
 
   const ViewMode = <h3>{post.content}</h3>;
 
-  console.log(editView);
   return (
     <div className={styles.diaryPost}>
       <h1>{post.title}</h1>

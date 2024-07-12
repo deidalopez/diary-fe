@@ -19,7 +19,7 @@ const PostHead = ({ post }) => {
   };
 
   return (
-    <li>
+    <li className={styles.postContainer}>
       <span className={styles.postHeadHeader}>
         <h2>
           <Link to={`/api/posts/${post._id}`}>{post.title}</Link>
@@ -42,7 +42,7 @@ const PostHead = ({ post }) => {
         </div>
       </span>
       <div>{format(new Date(post.date), "MMMM d, y")}</div>
-      <p>{post.content.substring(0, 200) + " ..."}</p>
+      <p>{post.content.substring(0, 400) + " ..."}</p>
     </li>
   );
 };

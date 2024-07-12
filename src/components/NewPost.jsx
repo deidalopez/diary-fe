@@ -9,7 +9,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import editPost from "../api/editPost";
 
 const NewPost = ({ currentPost, isEdit, callback }) => {
-
   const { register, handleSubmit, setError, reset, formState } = useForm({
     defaultValues:
       isEdit && currentPost
@@ -19,7 +18,6 @@ const NewPost = ({ currentPost, isEdit, callback }) => {
           }
         : {},
   });
-
   const { dispatch } = usePostsContext();
   const { user } = useAuthContext();
 
@@ -43,11 +41,9 @@ const NewPost = ({ currentPost, isEdit, callback }) => {
 
       if (response.ok) {
         reset();
-        const body = await json.text();
-        const newPost = JSON.parse(body);
         dispatch({
           type: "EDIT_POST",
-          payload: newPost,
+          payload: json,
         });
       }
       callback();

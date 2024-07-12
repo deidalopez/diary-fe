@@ -36,15 +36,17 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <div>
+    <div className={styles.homeScreen}>
+      <div className={styles.column}>
         <h1>Posts</h1>
         <ul className={styles.postList}>
           {posts &&
             posts.map((post) => <PostHead key={post._id} post={post} />)}
         </ul>
       </div>
-      <NewPost/>
+      <div className={styles.column}>
+        <NewPost />
+      </div>
     </div>
   );
 };
