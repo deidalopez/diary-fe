@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
 import Signup from "./pages/SignUp";
 import Login from "./pages/Login";
+import NewPostScreen from "./pages/NewPostScreen";
 import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
@@ -18,6 +19,10 @@ function App() {
         {
           path: "/api/posts/:id",
           element: user ? <PostPage /> : <Navigate to="/api/login" />,
+        },
+        {
+          path: "/new-post",
+          element: user ? <NewPostScreen /> : <Navigate to="/api/login" />,
         },
         { path: "/api/login", element: user ? <Navigate to="/" /> : <Login /> },
         {

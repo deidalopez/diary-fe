@@ -1,12 +1,11 @@
-import React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { usePostsContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import getPosts from "../api/getPosts";
 import PostHead from "../components/PostHead";
-import NewPost from "../components/NewPost";
+// import NewPost from "../components/NewPost";
 import styles from "../styles/styles.module.scss";
-
 const Home = () => {
   const { posts, dispatch } = usePostsContext();
   const { user } = useAuthContext();
@@ -45,7 +44,10 @@ const Home = () => {
         </ul>
       </div>
       <div className={styles.column}>
-        <NewPost />
+        {/* <NewPost /> */}
+        <Link to={"/new-post"}>
+          <button>Make new post</button>
+        </Link>
       </div>
     </div>
   );
