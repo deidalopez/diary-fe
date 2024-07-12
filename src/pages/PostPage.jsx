@@ -43,13 +43,18 @@ const PostPage = () => {
     </div>
   );
 
-  const ViewMode = <h3>{post.content}</h3>;
-
+  const ViewMode = (
+    <div>
+      <p>{post.content}</p>
+    </div>
+  );
   return (
     <div className={styles.diaryPost}>
       <h1>{post.title}</h1>
       <div>
-        <div>{format(new Date(post.date), "MMMM d, y")}</div>
+        <div>
+          <h4>{format(new Date(post.date), "MMMM d, y")}</h4>
+        </div>
         <span className="material-symbols-outlined" onClick={handleEditClick}>
           {editView ? "close" : "edit"}
         </span>
